@@ -1,5 +1,5 @@
 const dns = require('dns');
-dns.setDefaultResultOrder('ipv4first'); // Corrección para que Nodemailer use IPv4 en Render
+dns.setDefaultResultOrder('ipv4first'); // Fuerza a Node a resolver DNS priorizando IPv4
 
 const express = require('express');
 const cors = require('cors');
@@ -17,19 +17,21 @@ const supabase = createClient(
   process.env.SUPABASE_KEY
 );
 
-// 2. Transportador de correo
+// 2. Transportador de correo (Puerto 465 con SSL directo para evitar timeouts en Render)
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
+  port: 465,
+  secure: true, // SSL directo
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   },
-  family: 4, // Forzar IPv4
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000
+  tls: {
+    rejectUnauthorized: false
+  },
+  connectionTimeout: 15000,
+  greetingTimeout: 15000,
+  socketTimeout: 15000
 });
 
 // Endpoint para procesar la donación
