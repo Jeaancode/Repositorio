@@ -40,7 +40,7 @@ app.post('/api/donate', async (req, res) => {
       console.log('Donación guardada exitosamente en Supabase');
     }
 
-    // 2. Enviar correo vía Resend API (HTTP puerto 443, no bloqueado por Render)
+    // 2. Enviar correo vía Resend API (destinatario forzado a tu correo de prueba)
     try {
       const resendResponse = await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -50,7 +50,7 @@ app.post('/api/donate', async (req, res) => {
         },
         body: JSON.stringify({
           from: 'Kikicode <onboarding@resend.dev>',
-          to: [email],
+          to: ['19-10572@usb.ve'], // Correo registrado en tu cuenta de Resend
           subject: '¡Muchísimas gracias por tu apoyo! ☕',
           html: `
             <div style="font-family: Arial, sans-serif; background-color: #090d16; color: #f8fafc; padding: 20px; border-radius: 10px;">
