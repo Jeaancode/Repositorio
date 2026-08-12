@@ -8,22 +8,22 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 1. Inicialización del cliente de Supabase
+// 1. Inicialización de Supabase
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
 );
 
-// 2. Transportador de correo (con 'family: 4' para forzar IPv4 en Render)
+// 2. Transportador de correo (con 'family: 4' para IPv4)
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
-  secure: false, // Utiliza TLS en puerto 587
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   },
-  family: 4, // <-- Resuelve el error ENETUNREACH en los servidores de Render
+  family: 4, // Forzar IPv4 en Render
   connectionTimeout: 10000,
   greetingTimeout: 10000,
   socketTimeout: 10000
@@ -38,7 +38,7 @@ app.post('/api/donate', async (req, res) => {
   }
 
   try {
-    // 1. Guardar directo en la base de datos de Supabase
+    // 1. Guardar en Supabase mapeando con los nombres de la tabla
     const { data, error: dbError } = await supabase
       .from('donaciones')
       .insert([
@@ -56,7 +56,7 @@ app.post('/api/donate', async (req, res) => {
       console.log('Donación guardada exitosamente en Supabase');
     }
 
-    // 2. Intentar enviar el correo por separado
+    // 2. Enviar correo de agradecimiento
     try {
       const mailOptions = {
         from: `"Blujeaan | Kikicode" <${process.env.EMAIL_USER}>`,
@@ -84,7 +84,6 @@ app.post('/api/donate', async (req, res) => {
       console.error('El correo no se pudo enviar, pero la donación sí fue registrada:', emailError.message);
     }
 
-    // 3. Responder ÉXITO a la página web
     return res.status(200).json({
       success: true,
       message: 'Donación registrada exitosamente en la nube.'
