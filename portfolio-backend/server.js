@@ -1,7 +1,5 @@
-const dns = require('dns');
 const express = require('express');
 const cors = require('cors');
-const nodemailer = require('nodemailer');
 const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config();
 
@@ -15,23 +13,6 @@ const supabase = createClient(
   process.env.SUPABASE_KEY
 );
 
-// 2. Transportador de correo (forzando DNS a resolver únicamente IPv4)
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  },
-  lookup: (hostname, options, callback) => {
-    dns.lookup(hostname, { family: 4 }, callback);
-  },
-  connectionTimeout: 15000,
-  greetingTimeout: 15000,
-  socketTimeout: 15000
-});
-
 // Endpoint para procesar la donación
 app.post('/api/donate', async (req, res) => {
   const { name, email, amount, method, reference, bank } = req.body;
@@ -41,7 +22,7 @@ app.post('/api/donate', async (req, res) => {
   }
 
   try {
-    // 1. Guardar en Supabase mapeando con los nombres de la tabla
+    // 1. Guardar en Supabase
     const { data, error: dbError } = await supabase
       .from('donaciones')
       .insert([
@@ -59,30 +40,42 @@ app.post('/api/donate', async (req, res) => {
       console.log('Donación guardada exitosamente en Supabase');
     }
 
-    // 2. Enviar correo de agradecimiento
+    // 2. Enviar correo vía Resend API (HTTP puerto 443, no bloqueado por Render)
     try {
-      const mailOptions = {
-        from: `"Blujeaan | Kikicode" <${process.env.EMAIL_USER}>`,
-        to: email,
-        subject: '¡Muchísimas gracias por tu apoyo! ☕',
-        html: `
-          <div style="font-family: Arial, sans-serif; background-color: #090d16; color: #f8fafc; padding: 20px; border-radius: 10px;">
-            <h2 style="color: #38bdf8;">¡Hola, ${name}!</h2>
-            <p>Quería agradecerte personalmente por tu valioso aporte a mi trabajo.</p>
-            <div style="background: rgba(30, 41, 59, 0.8); padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b;">
-              <p style="margin: 5px 0;"><strong>Monto:</strong> ${amount}</p>
-              <p style="margin: 5px 0;"><strong>Método de pago:</strong> ${method}</p>
-              ${reference ? `<p style="margin: 5px 0;"><strong>Referencia:</strong> ${reference}</p>` : ''}
+      const resendResponse = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
+        },
+        body: JSON.stringify({
+          from: 'Kikicode <onboarding@resend.dev>',
+          to: [email],
+          subject: '¡Muchísimas gracias por tu apoyo! ☕',
+          html: `
+            <div style="font-family: Arial, sans-serif; background-color: #090d16; color: #f8fafc; padding: 20px; border-radius: 10px;">
+              <h2 style="color: #38bdf8;">¡Hola, ${name}!</h2>
+              <p>Quería agradecerte personalmente por tu valioso aporte a mi trabajo.</p>
+              <div style="background: rgba(30, 41, 59, 0.8); padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                <p style="margin: 5px 0;"><strong>Monto:</strong> ${amount}</p>
+                <p style="margin: 5px 0;"><strong>Método de pago:</strong> ${method}</p>
+                ${reference ? `<p style="margin: 5px 0;"><strong>Referencia:</strong> ${reference}</p>` : ''}
+              </div>
+              <p style="margin-top: 20px;">Tu contribución me ayuda directamente a seguir creando contenido de código abierto y mejorando mis proyectos.</p>
+              <br>
+              <p style="color: #94a3b8;">Atentamente,<br><strong>Blujeaan / Kikicode</strong></p>
             </div>
-            <p style="margin-top: 20px;">Tu contribución me ayuda directamente a seguir creando contenido de código abierto y mejorando mis proyectos.</p>
-            <br>
-            <p style="color: #94a3b8;">Atentamente,<br><strong>Blujeaan / Kikicode</strong></p>
-          </div>
-        `
-      };
+          `
+        })
+      });
 
-      await transporter.sendMail(mailOptions);
-      console.log('Correo de agradecimiento enviado exitosamente.');
+      const resendData = await resendResponse.json();
+
+      if (resendResponse.ok) {
+        console.log('Correo enviado exitosamente vía Resend:', resendData.id);
+      } else {
+        console.error('Error al enviar correo vía Resend:', resendData);
+      }
     } catch (emailError) {
       console.error('El correo no se pudo enviar, pero la donación sí fue registrada:', emailError.message);
     }
