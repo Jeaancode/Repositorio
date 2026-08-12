@@ -7,8 +7,8 @@
   <!-- SEO Principales -->
   <title>Blujeaan | Desarrollador Web Frontend & Portafolio</title>
   <meta name="title" content="Blujeaan | Desarrollador Web Frontend & Portafolio">
-  <meta name="description" content="Portafolio profesional de Blujeaan. Especializado en desarrollo frontend, JavaScript, React, Node.js y la creación de experiencias web modernas e interactivas.">
-  <meta name="keywords" content="Blujeaan, Desarrollador Frontend, Portafolio, Web Developer, JavaScript, React, Node.js, CSS, Tailwind">
+  <meta name="description" content="Portafolio profesional de Blujeaan. Especializado en desarrollo frontend, JavaScript, React, Node.js, MongoDB y la creación de experiencias web modernas e interactivas.">
+  <meta name="keywords" content="Blujeaan, Desarrollador Frontend, Portafolio, Web Developer, JavaScript, React, Node.js, MongoDB, CSS, Tailwind">
   <meta name="author" content="Blujeaan">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#090d16">
@@ -44,6 +44,8 @@
       --primary-glow: rgba(56, 189, 248, 0.35);
       --border-color: rgba(51, 65, 85, 0.6);
       --accent-color: #818cf8;
+      --amber-color: #f59e0b;
+      --amber-glow: rgba(245, 158, 11, 0.4);
       --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --mono-font: 'Courier New', Courier, monospace, monospace;
     }
@@ -154,7 +156,7 @@
       padding: 0.4rem 1rem;
       border-radius: 20px;
       font-weight: 700 !important;
-      box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+      box-shadow: 0 0 12px var(--amber-glow);
       transition: all 0.3s ease !important;
     }
 
@@ -317,7 +319,7 @@
     .btn.donate {
       background: linear-gradient(135deg, #f59e0b, #d97706);
       color: #0f172a;
-      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+      box-shadow: 0 4px 20px var(--amber-glow);
     }
 
     .btn.donate:hover {
@@ -667,7 +669,7 @@
       gap: 0.3rem;
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       z-index: 50;
-      width: 200px;
+      width: 210px;
       text-align: center;
     }
 
@@ -890,13 +892,13 @@
     .social-card.whatsapp:hover { border-color: #25d366; }
     .social-card.whatsapp:hover .social-bg-popup svg { fill: #25d366; }
 
-    /* ==========================================
-       ESTILOS PANTALLA DEDICADA / MODAL DONAR
-       ========================================== */
+    /* ==========================================================
+       ESTILOS DEDICADOS / MEJORADOS MODAL DONACIONES
+       ========================================================== */
     .donate-screen {
       position: fixed;
       inset: 0;
-      background: rgba(9, 13, 22, 0.92);
+      background: rgba(9, 13, 22, 0.94);
       backdrop-filter: blur(20px);
       z-index: 2000;
       display: flex;
@@ -915,35 +917,55 @@
     }
 
     .donate-card {
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid var(--f59e0b, #f59e0b);
-      border-radius: 20px;
-      width: min(550px, 95vw);
+      background: rgba(15, 23, 42, 0.98);
+      border: 1px solid var(--amber-color);
+      border-radius: 24px;
+      width: min(600px, 95vw);
       max-height: 90vh;
       overflow-y: auto;
       padding: 2.5rem;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(245, 158, 11, 0.25);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), 0 0 35px var(--amber-glow);
       position: relative;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--amber-color) transparent;
+    }
+
+    .donate-card::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .donate-card::-webkit-scrollbar-thumb {
+      background: var(--amber-color);
+      border-radius: 3px;
     }
 
     .close-donate-btn {
       position: absolute;
       top: 1.2rem;
       right: 1.2rem;
-      background: transparent;
-      border: none;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--text-muted);
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       cursor: pointer;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
       line-height: 1;
     }
 
     .close-donate-btn:hover {
       color: #ef4444;
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.15);
+      transform: rotate(90deg);
     }
 
     .donate-header {
@@ -951,9 +973,10 @@
     }
 
     .donate-header h2 {
-      font-size: 2rem;
-      color: #f59e0b;
+      font-size: 2.1rem;
+      color: var(--amber-color);
       margin-bottom: 0.5rem;
+      text-shadow: 0 0 15px var(--amber-glow);
     }
 
     .amount-presets {
@@ -967,31 +990,181 @@
       background: rgba(30, 41, 59, 0.8);
       border: 1px solid var(--border-color);
       color: var(--text-color);
-      padding: 0.6rem;
-      border-radius: 8px;
+      padding: 0.65rem;
+      border-radius: 10px;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
     .preset-btn.active, .preset-btn:hover {
-      border-color: #f59e0b;
-      background: rgba(245, 158, 11, 0.15);
-      color: #f59e0b;
+      border-color: var(--amber-color);
+      background: rgba(245, 158, 11, 0.18);
+      color: var(--amber-color);
+      box-shadow: 0 0 12px var(--amber-glow);
+      transform: translateY(-2px);
     }
 
-    .payment-details-box {
-      background: rgba(30, 41, 59, 0.5);
-      border: 1px dashed var(--border-color);
-      border-radius: 10px;
-      padding: 1rem;
-      font-size: 0.85rem;
+    /* Pestañas de Métodos de Pago Dinámicos */
+    .pay-methods-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      margin-top: 0.3rem;
+    }
+
+    .pay-tab-btn {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--border-color);
       color: var(--text-muted);
+      padding: 0.7rem 0.5rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s ease;
     }
 
-    .payment-details-box span {
+    .pay-tab-btn svg, .pay-tab-btn span.tab-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .pay-tab-btn.active {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: var(--amber-color);
+      color: #ffffff;
+      box-shadow: 0 0 15px var(--amber-glow);
+    }
+
+    .pay-tab-btn.active .tab-icon {
+      transform: scale(1.2);
+    }
+
+    .pay-tab-btn:hover:not(.active) {
+      border-color: var(--primary-color);
       color: var(--text-color);
-      font-weight: 600;
+    }
+
+    /* Tarjetas de Detalle Interactivas */
+    .payment-details-container {
+      position: relative;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin-top: 0.5rem;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .payment-panel {
+      display: none;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .payment-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pay-info-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .pay-info-header h4 {
+      color: var(--amber-color);
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .currency-badge {
+      font-size: 0.75rem;
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--amber-color);
+      border: 1px solid var(--amber-color);
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      font-weight: 700;
+    }
+
+    .data-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(30, 41, 59, 0.5);
+      padding: 0.65rem 0.9rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      gap: 0.8rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .data-row:hover {
+      border-color: var(--amber-color);
+    }
+
+    .data-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .data-value {
+      font-family: var(--mono-font);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-color);
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      flex-shrink: 0;
+    }
+
+    .copy-btn:hover {
+      background: var(--primary-color);
+      color: #0f172a;
+      box-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    .copy-btn.copied {
+      background: #10b981 !important;
+      border-color: #10b981 !important;
+      color: #ffffff !important;
     }
 
     /* CLI Styles */
@@ -1099,22 +1272,6 @@
       white-space: pre-wrap;
     }
 
-    .cli-line.user-entry {
-      color: var(--text-color);
-    }
-
-    .cli-line.system-response {
-      color: #cbd5e1;
-    }
-
-    .cli-line.success-response {
-      color: #34d399;
-    }
-
-    .cli-line.warning-response {
-      color: #fbbf24;
-    }
-
     .cmd-highlight {
       color: var(--primary-color);
       font-weight: 700;
@@ -1165,6 +1322,9 @@
       .cli-modal { right: 4vw; bottom: 5rem; }
       .cli-toggle-btn { bottom: 1.2rem; right: 1.2rem; }
       .amount-presets { grid-template-columns: repeat(2, 1fr); }
+      .pay-methods-tabs { grid-template-columns: 1fr; }
+      .data-row { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+      .copy-btn { align-self: flex-end; }
     }
   </style>
 </head>
@@ -1235,13 +1395,7 @@
       </div>
       <p class="i18n" 
          data-es="Desarrollador Frontend apasionado por construir aplicaciones web eficientes y de alto impacto. Mi experiencia abarca desde el desarrollo independiente de proyectos personales hasta la entrega de soluciones para empresas y organizaciones. Me destaco por mi versatilidad técnica y rapidez de integración, desenvolviéndome con naturalidad tanto en arquitecturas modernas como en sistemas tradicionales. Enfoco mi trabajo en la resolución de problemas y en la experiencia de usuario, adaptándome con agilidad a la pila tecnológica que demande cada proyecto."
-         data-en="Frontend Developer passionate about building efficient, high-impact web applications. My experience ranges from independent personal projects to delivering solutions for companies and organizations. I stand out for my technical versatility and rapid integration, working naturally with both modern architectures and traditional systems. I focus my work on problem-solving and user experience, adapting quickly to whatever tech stack each project demands."
-         data-pt="Desenvolvedor Frontend apaixonado por criar aplicações web eficientes e de alto impacto. Minha experiência abrange desde o desenvolvimento independente de projetos pessoais até a entrega de soluções para empresas e organizações. Destaco-me pela minha versatilidade técnica e rápida integração, trabalhando com facilidade tanto em arquiteturas modernas quanto em sistemas tradicionais."
-         data-de="Frontend-Entwickler mit Leidenschaft für die Erstellung effizienter und wirkungsvoller Webanwendungen. Meine Erfahrung reicht von unabhängigen persönlichen Projekten bis hin zur Bereitstellung von Lösungen für Unternehmen und Organisationen. Ich zeichne mich durch technische Vielseitigkeit und schnelle Integration aus und fühle mich sowohl in modernen Architekturen als auch in traditionellen Systemen zu Hause."
-         data-it="Sviluppatore Frontend appassionato nella creazione di applicazioni web efficienti e di alto impatto. La mia esperienza spazia dallo sviluppo indipendente di progetti personali alla fornitura di soluzioni per aziende e organizzazioni. Mi distinguo per la versatilità tecnica e la rapida integrazione, lavorando sia con architetture moderne che con sistemi tradizionali."
-         data-ja="効率的でインパクトのあるWebアプリケーションの構築に情熱を注ぐフロントエンドエンジニア。個人プロジェクトの開発から、企業や組織向けのソリューション提供まで幅広い実績があります。技術的な柔軟性と迅速なキャッチアップを得意とし、モダンなアーキテクチャから従来のシステムまでスムーズに対応します。"
-         data-zh="热衷于构建高效且具具有高影响力的 Web 应用程序的前端开发者。我的经验涵盖从独立个人项目的开发到为企业及组织提供专业解决方案。我以出色的技术通用性和快速融入能力见长，能够游刃有余地应对现代架构与传统系统。"
-         data-ar="مطور واجهة أمامية شغوف بإنشاء تطبيقات ويب عالية الكفاءة والأثر. تمتد خبرتي من تطوير المشاريع الشخصية المستقلة إلى تقديم الحلول للشركات والمؤسسات. أتميز بالمرونة التقنية وسرعة التكيف، والعمل بسلاسة مع الأنظمة الحديثة والتقليدية على حد سواء.">
+         data-en="Frontend Developer passionate about building efficient, high-impact web applications. My experience ranges from independent personal projects to delivering solutions for companies and organizations. I stand out for my technical versatility and rapid integration, working naturally with both modern architectures and traditional systems. I focus my work on problem-solving and user experience, adapting quickly to whatever tech stack each project demands.">
         Desarrollador Frontend apasionado por construir aplicaciones web eficientes y de alto impacto. Mi experiencia abarca desde el desarrollo independiente de proyectos personales hasta la entrega de soluciones para empresas y organizaciones. Me destaco por mi versatilidad técnica y rapidez de integración, desenvolviéndome con naturalidad tanto en arquitecturas modernas como en sistemas tradicionales. Enfoco mi trabajo en la resolución de problemas y en la experiencia de usuario, adaptándome con agilidad a la pila tecnológica que demande cada proyecto.
       </p>
     </div>
@@ -1252,13 +1406,7 @@
     <h2 class="i18n" data-es="Curriculum Vitae" data-en="Resume" data-pt="Currículo" data-de="Lebenslauf" data-it="Curriculum Vitae" data-ja="履歴書" data-zh="个人简历" data-ar="السيرة الذاتية">Curriculum Vitae</h2>
     <p style="margin-bottom: 2rem; color: var(--text-muted);" class="i18n" 
        data-es="Si gustas ver lo que hago y especializo a detalle, puedes ver mi CV a continuación." 
-       data-en="If you'd like to see what I do and my specialization in detail, check out my resume below."
-       data-pt="Se você quiser ver o que eu faço e minha especialização em detalhes, confira meu CV abaixo."
-       data-de="Wenn Sie im Detail sehen möchten, was ich tue und worauf ich spezialisiert bin, werfen Sie einen Blick auf meinen Lebenslauf."
-       data-it="Se vuoi vedere in dettaglio cosa faccio e la mia specializzazione, dai un'occhiata al mio CV qui sotto."
-       data-ja="私の詳細な実績や専門分野をご覧になりたい場合は、以下の履歴書をご確認ください。"
-       data-zh="如果你想详细了解我的工作和专业领域，请查看下面的简历。"
-       data-ar="إذا كنت ترغب في الاطلاع على ما أقوم به وتخصصي بالتفصيل، فيمكنك مراجعة سيرتي الذاتية أدناه.">
+       data-en="If you'd like to see what I do and my specialization in detail, check out my resume below.">
       Si gustas ver lo que hago y especializo a detalle, puedes ver mi CV a continuación.
     </p>
     
@@ -1290,24 +1438,8 @@
         </div>
 
         <div class="cv-overlay">
-          <div class="zoom-badge i18n" 
-               data-es="🔍 Vista Previa Interactiva" 
-               data-en="🔍 Interactive Preview" 
-               data-pt="🔍 Pré-visualização Interativa" 
-               data-de="🔍 Interaktive Vorschau" 
-               data-it="🔍 Anteprima Interattiva" 
-               data-ja="🔍 インタラクティブプレビュー" 
-               data-zh="🔍 交互式预览" 
-               data-ar="🔍 معاينة تفاعلية">🔍 Vista Previa Interactiva</div>
-          <a href="./CV_Blujeaan.pdf" download="CV_Blujeaan.pdf" class="btn primary i18n" 
-             data-es="📄 Descargar CV (PDF)" 
-             data-en="📄 Download Resume (PDF)" 
-             data-pt="📄 Baixar Currículo (PDF)" 
-             data-de="📄 Lebenslauf herunterladen (PDF)" 
-             data-it="📄 Scarica CV (PDF)" 
-             data-ja="📄 履歴書をダウンロード (PDF)" 
-             data-zh="📄 下载简历 (PDF)" 
-             data-ar="📄 تحميل السيرة الذاتية (PDF)">
+          <div class="zoom-badge i18n" data-es="🔍 Vista Previa Interactiva" data-en="🔍 Interactive Preview">🔍 Vista Previa Interactiva</div>
+          <a href="./CV_Blujeaan.pdf" download="CV_Blujeaan.pdf" class="btn primary i18n" data-es="📄 Descargar CV (PDF)" data-en="📄 Download Resume (PDF)">
             📄 Descargar CV (PDF)
           </a>
         </div>
@@ -1317,17 +1449,9 @@
 
   <!-- Repositorios Dinámicos -->
   <section id="projects" class="section">
-    <h2 class="i18n" data-es="Repositorios en Vivo" data-en="Live Repositories" data-pt="Repositórios ao Vivo" data-de="Live-Repositories" data-it="Repository dal Vivo" data-ja="ライブリポジトリ" data-zh="实时代码库" data-ar="المستودعات المباشرة">Repositorios en Vivo</h2>
+    <h2 class="i18n" data-es="Repositorios en Vivo" data-en="Live Repositories">Repositorios en Vivo</h2>
     <div class="projects-grid" id="projects-grid">
-      <div class="loading-state i18n" 
-           data-es="⚡ Conectando con la API de GitHub..." 
-           data-en="⚡ Connecting to GitHub API..." 
-           data-pt="⚡ Conectando à API do GitHub..." 
-           data-de="⚡ Verbindung zur GitHub-API..." 
-           data-it="⚡ Connessione all'API di GitHub..." 
-           data-ja="⚡ GitHub API に接続中..." 
-           data-zh="⚡ 正在连接 GitHub API..." 
-           data-ar="⚡ جاري الاتصال بـ GitHub API...">⚡ Conectando con la API de GitHub...</div>
+      <div class="loading-state i18n" data-es="⚡ Conectando con la API de GitHub..." data-en="⚡ Connecting to GitHub API...">⚡ Conectando con la API de GitHub...</div>
     </div>
   </section>
 
@@ -1336,13 +1460,7 @@
     <h2 class="i18n" data-es="Habilidades Técnicas" data-en="Technical Skills" data-pt="Habilidades Técnicas" data-de="Technische Fähigkeiten" data-it="Competenze Tecniche" data-ja="テクニカルスキル" data-zh="技术技能" data-ar="المهارات التقنية">Habilidades Técnicas</h2>
     <p style="margin-bottom: 1.5rem; color: var(--text-muted);" class="i18n" 
        data-es="Pasa el cursor o toca cada ícono con el dedo para ver qué hace cada tecnología:" 
-       data-en="Hover or tap each icon to see what each technology does:"
-       data-pt="Passe o cursor ou toque em cada ícone para ver o que cada tecnologia faz:"
-       data-de="Fahren Sie mit der Maus über ein Symbol oder tippen Sie darauf, um zu sehen, was die Technologie macht:"
-       data-it="Passa il mouse o tocca ogni icona per vedere cosa fa ciascuna tecnologia:"
-       data-ja="アイコンにホバーまたはタップすると、各テクノロジーの詳細が表示されます:"
-       data-zh="将鼠标悬停或点击每个图标以查看每种技术的功能："
-       data-ar="مرر الماوس أو انقر على كل أيقونة لمعرفة ما تفعله كل تقنية:">
+       data-en="Hover or tap each icon to see what each technology does:">
       Pasa el cursor o toca cada ícono con el dedo para ver qué hace cada tecnología:
     </p>
     
@@ -1351,15 +1469,7 @@
         <div class="skill-popup">
           <img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML5">
           <span class="skill-popup-badge">HTML5</span>
-          <p class="skill-popup-desc i18n" 
-             data-es="Estructura y maqueta el contenido de la página web." 
-             data-en="Structures and lays out web page content."
-             data-pt="Estrutura e organiza o conteúdo da página web."
-             data-de="Strukturiert und gestaltet den Inhalt von Webseiten."
-             data-it="Struttura e organizza il contenuto della pagina web."
-             data-ja="Webページのコンテンツを構造化およびレイアウトします。"
-             data-zh="构建并布局网页内容。"
-             data-ar="هيكلة وتنسيق محتوى صفحة الويب.">Estructura y maqueta el contenido de la página web.</p>
+          <p class="skill-popup-desc i18n" data-es="Estructura y maqueta el contenido de la página web." data-en="Structures and lays out web page content.">Estructura y maqueta el contenido de la página web.</p>
         </div>
         <img class="skill-icon-mini" src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML5">
         <span class="skill-name">HTML5</span>
@@ -1369,15 +1479,7 @@
         <div class="skill-popup">
           <img src="https://cdn.simpleicons.org/css/1572B6" alt="CSS3">
           <span class="skill-popup-badge">CSS3</span>
-          <p class="skill-popup-desc i18n" 
-             data-es="Aplica el diseño visual, colores, efectos y maquetación." 
-             data-en="Applies visual design, colors, effects, and layout."
-             data-pt="Aplica o design visual, cores, efeitos e layout."
-             data-de="Wendet visuelles Design, Farben, Effekte und Layouts an."
-             data-it="Applica il design visivo, i colori, gli effetti e il layout."
-             data-ja="視覚的デザイン、色、エフェクト、レイアウトを適用します。"
-             data-zh="应用视觉设计、颜色、效果和布局。"
-             data-ar="تطبيق التصميم البصري والألوان والمؤثرات والتخطيط.">Aplica el diseño visual, colores, efectos y maquetación.</p>
+          <p class="skill-popup-desc i18n" data-es="Aplica el diseño visual, colores, efectos y maquetación." data-en="Applies visual design, colors, effects, and layout.">Aplica el diseño visual, colores, efectos y maquetación.</p>
         </div>
         <img class="skill-icon-mini" src="https://cdn.simpleicons.org/css/1572B6" alt="CSS3">
         <span class="skill-name">CSS3</span>
@@ -1387,15 +1489,7 @@
         <div class="skill-popup">
           <img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript">
           <span class="skill-popup-badge">JavaScript</span>
-          <p class="skill-popup-desc i18n" 
-             data-es="Añade interactividad, lógica y dinámicas en tiempo real." 
-             data-en="Adds interactivity, logic, and real-time dynamics."
-             data-pt="Adiciona interatividade, lógica e dinâmicas em tempo real."
-             data-de="Fügt Interaktivität, Logik und Echtzeitdynamik hinzu."
-             data-it="Aggiunge interattività, logica e dinamiche in tempo reale."
-             data-ja="インタラクティブ性、ロジック、リアルタイム機能を追加します。"
-             data-zh="添加交互性、逻辑和实时动态。"
-             data-ar="إضافة التفاعلية والمنطق والديناميكيات في الوقت الفعلي.">Añade interactividad, lógica y dinámicas en tiempo real.</p>
+          <p class="skill-popup-desc i18n" data-es="Añade interactividad, lógica y dinámicas en tiempo real." data-en="Adds interactivity, logic, and real-time dynamics.">Añade interactividad, lógica y dinámicas en tiempo real.</p>
         </div>
         <img class="skill-icon-mini" src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript">
         <span class="skill-name">JavaScript</span>
@@ -1405,15 +1499,7 @@
         <div class="skill-popup">
           <img src="https://cdn.simpleicons.org/nodedotjs/5FA04E" alt="Node.js">
           <span class="skill-popup-badge">Node.js</span>
-          <p class="skill-popup-desc i18n" 
-             data-es="Entorno para ejecutar JavaScript en el servidor (backend)." 
-             data-en="Environment for executing JavaScript on the server (backend)."
-             data-pt="Ambiente para executar JavaScript no servidor (backend)."
-             data-de="Laufzeitumgebung zur Ausführung von JavaScript auf dem Server."
-             data-it="Ambiente per eseguire JavaScript sul server (backend)."
-             data-ja="サーバー（バックエンド）でJavaScriptを実行する環境。"
-             data-zh="在服务器端（后端）运行 JavaScript 的环境。"
-             data-ar="بيئة لتشغيل JavaScript على الخادم (الخلفية).">Entorno para ejecutar JavaScript en el servidor (backend).</p>
+          <p class="skill-popup-desc i18n" data-es="Entorno para ejecutar JavaScript en el servidor (backend)." data-en="Environment for executing JavaScript on the server (backend).">Entorno para ejecutar JavaScript en el servidor (backend).</p>
         </div>
         <img class="skill-icon-mini" src="https://cdn.simpleicons.org/nodedotjs/5FA04E" alt="Node.js">
         <span class="skill-name">Node.js</span>
@@ -1423,33 +1509,36 @@
         <div class="skill-popup">
           <img src="https://cdn.simpleicons.org/express/38bdf8" alt="Express">
           <span class="skill-popup-badge">Express.js</span>
-          <p class="skill-popup-desc i18n" 
-             data-es="Framework para crear servidores y APIs rápidamente." 
-             data-en="Framework for building servers and APIs quickly."
-             data-pt="Framework para criar servidores e APIs rapidamente."
-             data-de="Framework zur schnellen Erstellung von Servern und APIs."
-             data-it="Framework per creare server e API rapidamente."
-             data-ja="サーバーやAPIを迅速に構築するためのフレームワーク。"
-             data-zh="快速构建服务器和 API 的框架。"
-             data-ar="إطار عمل لإنشاء الخوادم وواجهات البرمجة بسرعة.">Framework para crear servidores y APIs rápidamente.</p>
+          <p class="skill-popup-desc i18n" data-es="Framework para crear servidores y APIs rápidamente." data-en="Framework for building servers and APIs quickly.">Framework para crear servidores y APIs rápidamente.</p>
         </div>
         <img class="skill-icon-mini" src="https://cdn.simpleicons.org/express/38bdf8" alt="Express">
         <span class="skill-name">Express.js</span>
+      </div>
+
+      <!-- HABILIDAD: MONGODB -->
+      <div class="skill-card" tabindex="0">
+        <div class="skill-popup">
+          <img src="https://cdn.simpleicons.org/mongodb/47A248" alt="MongoDB">
+          <span class="skill-popup-badge">MongoDB</span>
+          <p class="skill-popup-desc i18n" 
+             data-es="Base de datos NoSQL orientada a documentos flexibles y de alta velocidad." 
+             data-en="NoSQL database oriented to flexible, high-speed documents."
+             data-pt="Banco de dados NoSQL orientado a documentos flexíveis."
+             data-de="NoSQL-Datenbank für flexible Dokumente."
+             data-it="Database NoSQL orientato a documenti flessibili."
+             data-ja="柔軟なドキュメント指向NoSQLデータベース。"
+             data-zh="面向灵活文档的 NoSQL 数据库。"
+             data-ar="قاعدة بيانات NoSQL موجهة للمستندات المرنة.">Base de datos NoSQL orientada a documentos flexibles y de alta velocidad.</p>
+        </div>
+        <img class="skill-icon-mini" src="https://cdn.simpleicons.org/mongodb/47A248" alt="MongoDB">
+        <span class="skill-name">MongoDB</span>
       </div>
 
       <div class="skill-card" tabindex="0">
         <div class="skill-popup">
           <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub">
           <span class="skill-popup-badge">Git & GitHub</span>
-          <p class="skill-popup-desc i18n" 
-             data-es="Control de versiones para guardar cambios y colaboraciones." 
-             data-en="Version control for saving changes and collaboration."
-             data-pt="Controle de versão para salvar alterações e colaborações."
-             data-de="Versionskontrolle zum Speichern von Änderungen und zur Zusammenarbeit."
-             data-it="Controllo versione per salvare modifiche e collaborazioni."
-             data-ja="変更の保存やチームでのコラボレーションのためのバージョン管理。"
-             data-zh="用于保存更改和协作的版本控制。"
-             data-ar="نظام التحكم في الإصدارات لحفظ التغييرات والتعاون.">Control de versiones para guardar cambios y colaboraciones.</p>
+          <p class="skill-popup-desc i18n" data-es="Control de versiones para guardar cambios y colaboraciones." data-en="Version control for saving changes and collaboration.">Control de versiones para guardar cambios y colaboraciones.</p>
         </div>
         <img class="skill-icon-mini" src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub">
         <span class="skill-name">Git & GitHub</span>
@@ -1459,15 +1548,7 @@
         <div class="skill-popup">
           <img src="https://cdn.simpleicons.org/postman/FF6C37" alt="REST API">
           <span class="skill-popup-badge">REST APIs</span>
-          <p class="skill-popup-desc i18n" 
-             data-es="Reglas para comunicar e intercambiar datos cliente-servidor." 
-             data-en="Rules for client-server communication and data exchange."
-             data-pt="Regras para comunicar e trocar dados entre cliente e servidor."
-             data-de="Regeln für die Kommunikation und den Datenaustausch zwischen Client und Server."
-             data-it="Regole per la comunicazione e lo scambio dati client-server."
-             data-ja="クライアントとサーバー間の通信およびデータ交換のルール。"
-             data-zh="客户端与服务器之间通信和数据交换的规则。"
-             data-ar="قواعد للاتصال وتبادل البيانات بين العميل والخادم.">Reglas para comunicar e intercambiar datos cliente-servidor.</p>
+          <p class="skill-popup-desc i18n" data-es="Reglas para comunicar e intercambiar datos cliente-servidor." data-en="Rules for client-server communication and data exchange.">Reglas para comunicar e intercambiar datos cliente-servidor.</p>
         </div>
         <img class="skill-icon-mini" src="https://cdn.simpleicons.org/postman/FF6C37" alt="REST API">
         <span class="skill-name">REST APIs</span>
@@ -1477,15 +1558,7 @@
         <div class="skill-popup">
           <img src="https://cdn.simpleicons.org/python/3776AB" alt="Python">
           <span class="skill-popup-badge">Python</span>
-          <p class="skill-popup-desc i18n" 
-             data-es="Lenguaje versátil para backend, automatización y scripting." 
-             data-en="Versatile language for backend, automation, and scripting."
-             data-pt="Linguagem versátil para backend, automação e scripting."
-             data-de="Vielseitige Sprache für Backend, Automatisierung und Scripting."
-             data-it="Linguaggio versatile per backend, automazione e scripting."
-             data-ja="バックエンド、自動化、スクリプティングに対応する多目的言語。"
-             data-zh="用于后端、自动化和脚本编写的多功能语言。"
-             data-ar="لغة متعددة الاستخدامات للخلفيات والأتمتة والبرمجة النصية.">Lenguaje versátil para backend, automatización y scripting.</p>
+          <p class="skill-popup-desc i18n" data-es="Lenguaje versátil para backend, automatización y scripting." data-en="Versatile language for backend, automation, and scripting.">Lenguaje versátil para backend, automatización y scripting.</p>
         </div>
         <img class="skill-icon-mini" src="https://cdn.simpleicons.org/python/3776AB" alt="Python">
         <span class="skill-name">Python</span>
@@ -1495,15 +1568,7 @@
         <div class="skill-popup">
           <img src="https://cdn.simpleicons.org/react/61DAFB" alt="React">
           <span class="skill-popup-badge">React</span>
-          <p class="skill-popup-desc i18n" 
-             data-es="Librería para construir interfaces web mediante componentes." 
-             data-en="Library for building web interfaces using components."
-             data-pt="Biblioteca para construir interfaces web usando componentes."
-             data-de="Bibliothek zum Erstellen von Benutzeroberflächen mithilfe von Komponenten."
-             data-it="Libreria per creare interfacce web basate su componenti."
-             data-ja="コンポーネントを使用してWeb UIを構築するためのライブラリ。"
-             data-zh="用于通过组件构建 Web 界面的库。"
-             data-ar="مكتبة لبناء واجهات الويب باستخدام المكونات.">Librería para construir interfaces web mediante componentes.</p>
+          <p class="skill-popup-desc i18n" data-es="Librería para construir interfaces web mediante componentes." data-en="Library for building web interfaces using components.">Librería para construir interfaces web mediante componentes.</p>
         </div>
         <img class="skill-icon-mini" src="https://cdn.simpleicons.org/react/61DAFB" alt="React">
         <span class="skill-name">React</span>
@@ -1513,15 +1578,7 @@
         <div class="skill-popup">
           <img src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="Tailwind CSS">
           <span class="skill-popup-badge">Tailwind CSS</span>
-          <p class="skill-popup-desc i18n" 
-             data-es="Framework de estilos rápidos aplicando clases utilitarias." 
-             data-en="Utility-first style framework for rapid UI development."
-             data-pt="Framework de estilos rápidos aplicando classes utilitárias."
-             data-de="Utility-first CSS-Framework für die schnelle Entwicklung von UIs."
-             data-it="Framework per lo styling rapido tramite classi di utilità."
-             data-ja="ユーティリティクラスを使用した迅速なスタイリング用フレームワーク。"
-             data-zh="通过实用类快速构建样式的 CSS 框架。"
-             data-ar="إطار عمل للتنسيق السريع باستخدام فئات الأدوات.">Framework de estilos rápidos aplicando clases utilitarias.</p>
+          <p class="skill-popup-desc i18n" data-es="Framework de estilos rápidos aplicando clases utilitarias." data-en="Utility-first style framework for rapid UI development.">Framework de estilos rápidos aplicando clases utilitarias.</p>
         </div>
         <img class="skill-icon-mini" src="https://cdn.simpleicons.org/tailwindcss/06B6D4" alt="Tailwind CSS">
         <span class="skill-name">Tailwind CSS</span>
@@ -1531,15 +1588,7 @@
         <div class="skill-popup">
           <img src="https://cdn.simpleicons.org/render/ffffff" alt="Render">
           <span class="skill-popup-badge">Render</span>
-          <p class="skill-popup-desc i18n" 
-             data-es="Plataforma en la nube para alojar y desplegar aplicaciones." 
-             data-en="Cloud platform to host and deploy applications."
-             data-pt="Plataforma em nuvem para hospedar e implantar aplicações."
-             data-de="Cloud-Plattform zum Hosten und Bereitstellen von Anwendungen."
-             data-it="Piattaforma cloud per l'hosting e il deployment di applicazioni."
-             data-ja="アプリケーションのホスティングおよびデプロイ用クラウドプラットフォーム。"
-             data-zh="用于托管和部署应用程序的云平台。"
-             data-ar="منصة سحابية لاستضافة التطبيقات ونشرها.">Plataforma en la nube para alojar y desplegar aplicaciones.</p>
+          <p class="skill-popup-desc i18n" data-es="Plataforma en la nube para alojar y desplegar aplicaciones." data-en="Cloud platform to host and deploy applications.">Plataforma en la nube para alojar y desplegar aplicaciones.</p>
         </div>
         <img class="skill-icon-mini" src="https://cdn.simpleicons.org/render/ffffff" alt="Render">
         <span class="skill-name">Render / Deploy</span>
@@ -1549,15 +1598,7 @@
         <div class="skill-popup">
           <img src="https://cdn.simpleicons.org/figma/F24E1E" alt="Responsive Design">
           <span class="skill-popup-badge">Responsive</span>
-          <p class="skill-popup-desc i18n" 
-             data-es="Adapta el diseño web a celulares, tablets y computadoras." 
-             data-en="Adapts web design for mobile phones, tablets, and desktops."
-             data-pt="Adapta o design web para celulares, tablets e computadores."
-             data-de="Passt das Webdesign an Smartphones, Tablets und PCs an."
-             data-it="Adatta il design web a smartphone, tablet e computer."
-             data-ja="スマートフォン、タブレット、PCにWebデザインを適応させます。"
-             data-zh="适应手机、平板电脑和桌面电脑的网页设计。"
-             data-ar="تكييف تصميم الويب للهواتف المحمولة والأجهزة اللوحية وأجهزة الكمبيوتر.">Adapta el diseño web a celulares, tablets y computadoras.</p>
+          <p class="skill-popup-desc i18n" data-es="Adapta el diseño web a celulares, tablets y computadoras." data-en="Adapts web design for mobile phones, tablets, and desktops.">Adapta el diseño web a celulares, tablets y computadoras.</p>
         </div>
         <img class="skill-icon-mini" src="https://cdn.simpleicons.org/figma/F24E1E" alt="Responsive Design">
         <span class="skill-name">Responsive Design</span>
@@ -1567,66 +1608,28 @@
 
   <!-- Contacto -->
   <section id="contact" class="section">
-    <h2 class="i18n" data-es="Contacto" data-en="Contact" data-pt="Contato" data-de="Kontakt" data-it="Contatti" data-ja="お問い合わせ" data-zh="联系" data-ar="اتصل بي">Contacto</h2>
+    <h2 class="i18n" data-es="Contacto" data-en="Contact">Contacto</h2>
     <p style="margin-bottom: 1.5rem; color: var(--text-muted); text-align: center;" class="i18n" 
        data-es="¿Tienes una propuesta o quieres colaborar en algún proyecto? Escríbeme:" 
-       data-en="Have a proposal or want to collaborate on a project? Send me a message:"
-       data-pt="Tem uma proposta ou quer colaborar em algum projeto? Escreva para mim:"
-       data-de="Haben Sie ein Angebot oder möchten Sie an einem Projekt zusammenarbeiten? Schreiben Sie mir:"
-       data-it="Hai una proposta o vuoi collaborare a un progetto? Scrivimi:"
-       data-ja="提案やプロジェクトでのコラボレーションのご希望がありますか？お気軽にご連絡ください:"
-       data-zh="有合作意向或想参与项目合作？给我留言："
-       data-ar="هل لديك اقتراح أو ترغب في التعاون في مشروع ما؟ اكتب لي:">
+       data-en="Have a proposal or want to collaborate on a project? Send me a message:">
       ¿Tienes una propuesta o quieres colaborar en algún proyecto? Escríbeme:
     </p>
 
     <form id="contactForm" class="contact-form">
       <div class="form-group">
-        <label for="name" class="i18n" data-es="Nombre:" data-en="Name:" data-pt="Nome:" data-de="Name:" data-it="Nome:" data-ja="お名前:" data-zh="姓名:" data-ar="الاسم:">Nombre:</label>
-        <input type="text" id="name" placeholder="Tu nombre" 
-               data-es-placeholder="Tu nombre" 
-               data-en-placeholder="Your name" 
-               data-pt-placeholder="Seu nome" 
-               data-de-placeholder="Ihr Name" 
-               data-it-placeholder="Il tuo nome" 
-               data-ja-placeholder="お名前を入力" 
-               data-zh-placeholder="您的姓名" 
-               data-ar-placeholder="اسمك" required>
+        <label for="name" class="i18n" data-es="Nombre:" data-en="Name:">Nombre:</label>
+        <input type="text" id="name" placeholder="Tu nombre" data-es-placeholder="Tu nombre" data-en-placeholder="Your name" required>
       </div>
       <div class="form-group">
-        <label for="email" class="i18n" data-es="Correo electrónico:" data-en="Email:" data-pt="E-mail:" data-de="E-Mail:" data-it="Email:" data-ja="メールアドレス:" data-zh="电子邮件:" data-ar="البريد الإلكتروني:">Correo electrónico:</label>
-        <input type="email" id="email" placeholder="tu-correo@ejemplo.com" 
-               data-es-placeholder="tu-correo@ejemplo.com" 
-               data-en-placeholder="your-email@example.com" 
-               data-pt-placeholder="seu-email@exemplo.com" 
-               data-de-placeholder="ihre-email@beispiel.de" 
-               data-it-placeholder="la-tua-email@esempio.com" 
-               data-ja-placeholder="your-email@example.com" 
-               data-zh-placeholder="your-email@example.com" 
-               data-ar-placeholder="your-email@example.com" required>
+        <label for="email" class="i18n" data-es="Correo electrónico:" data-en="Email:">Correo electrónico:</label>
+        <input type="email" id="email" placeholder="tu-correo@ejemplo.com" data-es-placeholder="tu-correo@ejemplo.com" data-en-placeholder="your-email@example.com" required>
       </div>
       <div class="form-group">
-        <label for="message" class="i18n" data-es="Mensaje:" data-en="Message:" data-pt="Mensagem:" data-de="Nachricht:" data-it="Messaggio:" data-ja="メッセージ:" data-zh="留言:" data-ar="الرسالة:">Mensaje:</label>
-        <textarea id="message" rows="4" placeholder="Escribe tu mensaje aquí..." 
-                  data-es-placeholder="Escribe tu mensaje aquí..." 
-                  data-en-placeholder="Write your message here..." 
-                  data-pt-placeholder="Escreva sua mensagem aqui..." 
-                  data-de-placeholder="Schreiben Sie Ihre Nachricht hier..." 
-                  data-it-placeholder="Scrivi il tuo messaggio qui..." 
-                  data-ja-placeholder="ここにメッセージを入力してください..." 
-                  data-zh-placeholder="在此处输入您的留言..." 
-                  data-ar-placeholder="اكتب رسالتك هنا..." maxlength="500" required></textarea>
+        <label for="message" class="i18n" data-es="Mensaje:" data-en="Message:">Mensaje:</label>
+        <textarea id="message" rows="4" placeholder="Escribe tu mensaje aquí..." data-es-placeholder="Escribe tu mensaje aquí..." data-en-placeholder="Write your message here..." maxlength="500" required></textarea>
         <small id="charCount" class="char-counter">0/500</small>
       </div>
-      <button type="submit" id="submitBtn" class="btn primary i18n" 
-              data-es="Enviar Mensaje" 
-              data-en="Send Message" 
-              data-pt="Enviar Mensagem" 
-              data-de="Nachricht Senden" 
-              data-it="Invia Messaggio" 
-              data-ja="メッセージを送信" 
-              data-zh="发送留言" 
-              data-ar="إرسال الرسالة" style="border: none; cursor: pointer; width: 100%;">Enviar Mensaje</button>
+      <button type="submit" id="submitBtn" class="btn primary i18n" data-es="Enviar Mensaje" data-en="Send Message" style="border: none; cursor: pointer; width: 100%;">Enviar Mensaje</button>
     </form>
 
     <p id="formStatus"></p>
@@ -1665,27 +1668,23 @@
     </div>
   </section>
 
-  <!-- PANTALLA DEDICADA DE DONACIONES (MODAL EN PANTALLA COMPLETA) -->
+  <!-- PANTALLA DEDICADA DE DONACIONES -->
   <div id="donate-screen" class="donate-screen hidden">
     <div class="donate-card">
       <button id="close-donate-btn" class="close-donate-btn" aria-label="Cerrar">&times;</button>
       
       <div class="donate-header">
-        <h2 class="i18n" data-es="☕ Apoya mi Desarrollo" data-en="☕ Support My Work" data-pt="☕ Apoie Meu Trabajo" data-de="☕ Spenden" data-it="☕ Sostieni il mio lavoro" data-ja="☕ 開発を支援する" data-zh="☕ 赞赏支持" data-ar="☕ دعم العمل">☕ Apoya mi Desarrollo</h2>
+        <h2 class="i18n" data-es="☕ Apoya mi Desarrollo" data-en="☕ Support My Work">☕ Apoya mi Desarrollo</h2>
         <p style="color: var(--text-muted); font-size: 0.9rem;" class="i18n" 
-           data-es="Tu apoyo ayuda a mantener mis proyectos activos y de código abierto." 
-           data-en="Your support helps keep my projects active and open source."
-           data-pt="Seu apoio ajuda a manter meus projetos ativos e de código aberto."
-           data-de="Ihre Unterstützung hilft, meine Projekte aktiv und Open Source zu halten."
-           data-it="Il tuo supporto aiuta a mantenere i miei progetti attivi e open source."
-           data-ja="あなたのサポートがプロジェクトの継続的な開発を支えます。"
-           data-zh="您的赞赏将帮助保持项目的持续开发与开源。"
-           data-ar="دعمك يساعد في الحفاظ على مشاريعي نشطة ومفتوحة المصدر.">
-          Tu apoyo ayuda a mantener mis proyectos activos y de código abierto.
+           data-es="Tu contribución mantiene mis proyectos activos y ayuda a mejorar el código abierto." 
+           data-en="Your contribution keeps my projects active and helps improve open source code.">
+          Tu contribución mantiene mis proyectos activos y ayuda a mejorar el código abierto.
         </p>
       </div>
 
       <form id="donateForm" style="display: flex; flex-direction: column; gap: 1.2rem;">
+        
+        <!-- Selección de Montos -->
         <div class="form-group">
           <label class="i18n" data-es="Selecciona o ingresa un monto ($USD):" data-en="Select or enter an amount ($USD):">Selecciona o ingresa un monto ($USD):</label>
           <div class="amount-presets">
@@ -1697,32 +1696,124 @@
           <input type="number" id="donate-amount" value="5" min="1" step="0.5" required>
         </div>
 
+        <!-- Pestañas para Selección de Método de Pago Dinámico -->
+        <div class="form-group">
+          <label class="i18n" data-es="Método de Pago:" data-en="Payment Method:">Método de Pago:</label>
+          <div class="pay-methods-tabs">
+            <button type="button" class="pay-tab-btn active" data-target="panel-pagomovil">
+              <span class="tab-icon">📱</span>
+              <span>Pago Móvil (VES)</span>
+            </button>
+            <button type="button" class="pay-tab-btn" data-target="panel-paypal">
+              <span class="tab-icon">💳</span>
+              <span>PayPal (USD)</span>
+            </button>
+            <button type="button" class="pay-tab-btn" data-target="panel-crypto">
+              <span class="tab-icon">⚡</span>
+              <span>Binance / USDT</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Caja de Detalles de Pago Interactivas con Botón "Copiar" -->
+        <div class="payment-details-container">
+          
+          <!-- PANEL 1: PAGO MÓVIL (VENEZUELA) -->
+          <div id="panel-pagomovil" class="payment-panel active">
+            <div class="pay-info-header">
+              <h4>📱 Datos de Pago Móvil</h4>
+              <span class="currency-badge">VES / Bolívares</span>
+            </div>
+            <div class="data-grid">
+              <div class="data-row">
+                <div>
+                  <div class="data-label">Banco Destino:</div>
+                  <div class="data-value">0105 - Mercantil</div>
+                </div>
+                <button type="button" class="copy-btn" onclick="copyToClipboard('0105', this)">📋 Copiar</button>
+              </div>
+              <div class="data-row">
+                <div>
+                  <div class="data-label">Cédula de Identidad:</div>
+                  <div class="data-value">V-30444778</div>
+                </div>
+                <button type="button" class="copy-btn" onclick="copyToClipboard('30444778', this)">📋 Copiar</button>
+              </div>
+              <div class="data-row">
+                <div>
+                  <div class="data-label">Teléfono:</div>
+                  <div class="data-value">0424-2139158</div>
+                </div>
+                <button type="button" class="copy-btn" onclick="copyToClipboard('04242139158', this)">📋 Copiar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANEL 2: PAYPAL (USD) -->
+          <div id="panel-paypal" class="payment-panel">
+            <div class="pay-info-header">
+              <h4>💳 Pago con PayPal</h4>
+              <span class="currency-badge">USD / Internacional</span>
+            </div>
+            <div class="data-grid">
+              <div class="data-row">
+                <div>
+                  <div class="data-label">Enlace Directo / Paypal Me:</div>
+                  <div class="data-value">https://paypal.me/jeaanibarra</div>
+                </div>
+                <button type="button" class="copy-btn" onclick="copyToClipboard('https://paypal.me/jeaanibarra', this)">📋 Copiar Link</button>
+              </div>
+              <div class="data-row">
+                <div>
+                  <div class="data-label">Correo Registrado:</div>
+                  <div class="data-value">jeaanibarra@gmail.com</div>
+                </div>
+                <button type="button" class="copy-btn" onclick="copyToClipboard('jeaanibarra@gmail.com', this)">📋 Copiar Email</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PANEL 3: CRIPTOMONEDAS / BINANCE -->
+          <div id="panel-crypto" class="payment-panel">
+            <div class="pay-info-header">
+              <h4>⚡ Criptomonedas / Binance Pay</h4>
+              <span class="currency-badge">USDT / BUSD</span>
+            </div>
+            <div class="data-grid">
+              <div class="data-row">
+                <div>
+                  <div class="data-label">Binance Pay ID:</div>
+                  <div class="data-value">1104186345</div>
+                </div>
+                <button type="button" class="copy-btn" onclick="copyToClipboard('1104186345', this)">📋 Copiar ID</button>
+              </div>
+              <div class="data-row">
+                <div>
+                  <div class="data-label">Dirección USDT (TRC20):</div>
+                  <div class="data-value" style="font-size: 0.78rem;">TYourWalletAddressUSDTNetworkTRC20Here</div>
+                </div>
+                <button type="button" class="copy-btn" onclick="copyToClipboard('TYourWalletAddressUSDTNetworkTRC20Here', this)">📋 Copiar Wallet</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Datos del Donante -->
         <div class="form-group">
           <label for="donate-name" class="i18n" data-es="Tu Nombre:" data-en="Your Name:">Tu Nombre:</label>
           <input type="text" id="donate-name" placeholder="Ej. Carlos Pérez" required>
         </div>
 
         <div class="form-group">
-          <label for="donate-email" class="i18n" data-es="Tu Correo (para enviar agradecimiento):" data-en="Your Email (for thank you note):">Tu Correo (para enviar agradecimiento):</label>
+          <label for="donate-email" class="i18n" data-es="Tu Correo (para enviar nota de agradecimiento):" data-en="Your Email (for thank you note):">Tu Correo (para enviar nota de agradecimiento):</label>
           <input type="email" id="donate-email" placeholder="tu-correo@ejemplo.com" required>
         </div>
 
-        <div class="form-group">
-          <label for="donate-method" class="i18n" data-es="Método de Pago:" data-en="Payment Method:">Método de Pago:</label>
-          <select id="donate-method" required>
-            <option value="PayPal">PayPal</option>
-            <option value="Pago Móvil / Transferencia">Pago Móvil (Venezuela)</option>
-            <option value="Criptomonedas / Binance">Criptomonedas (USDT / Binance Pay)</option>
-          </select>
-        </div>
-
-        <!-- Instrucciones según el método de pago elegido -->
-        <div id="payment-details" class="payment-details-box">
-          <p id="payment-instructions">Redirigiendo o procesando con PayPal...</p>
-        </div>
+        <input type="hidden" id="selected-method-value" value="Pago Móvil / Transferencia">
 
         <button type="submit" id="donateSubmitBtn" class="btn donate" style="width: 100%; border: none; cursor: pointer; padding: 1rem; font-size: 1rem;">
-          <span class="i18n" data-es="Registrar y Procesar Donación" data-en="Register & Process Donation">Registrar y Procesar Donación</span>
+          <span class="i18n" data-es="Registrar y Notificar Donación" data-en="Register & Notify Donation">Registrar y Notificar Donación</span>
         </button>
       </form>
 
@@ -1812,17 +1903,7 @@
         projectsGrid.innerHTML = '';
 
         if (repos.length === 0) {
-          const noReposMessages = {
-            es: 'No se encontraron repositorios públicos.',
-            en: 'No public repositories found.',
-            pt: 'Nenhum repositório público encontrado.',
-            de: 'Keine öffentlichen Repositories gefunden.',
-            it: 'Nessuna repository pubblica trovata.',
-            ja: '公開リポジトリが見つかりません。',
-            zh: '未找到公共代码库。',
-            ar: 'لم يتم العثور على مستودعات عامة.'
-          };
-          projectsGrid.innerHTML = `<p class="loading-state">${noReposMessages[currentLang] || noReposMessages.es}</p>`;
+          projectsGrid.innerHTML = `<p class="loading-state">No se encontraron repositorios públicos.</p>`;
           return;
         }
 
@@ -1836,26 +1917,10 @@
             ? `<a href="${repo.homepage}" target="_blank" rel="noopener">Demo ↗</a>` 
             : '';
 
-          const defaultDescMap = {
-            es: 'Sin descripción asignada en el repositorio.',
-            en: 'No description provided in repository.',
-            pt: 'Sem descrição atribuída no repositório.',
-            de: 'Keine Beschreibung im Repository angegeben.',
-            it: 'Nessuna descrizione assegnata nella repository.',
-            ja: 'リポジトリに説明がありません。',
-            zh: '代码库未提供描述。',
-            ar: 'لا يوجد وصف في المستودع.'
-          };
-
-          const codeLabelMap = {
-            es: 'Código ↗', en: 'Code ↗', pt: 'Código ↗', de: 'Code ↗',
-            it: 'Codice ↗', ja: 'コード ↗', zh: '代码 ↗', ar: 'الكود ↗'
-          };
-
           card.innerHTML = `
             <div>
               <h3>${repo.name.replace(/-/g, ' ')}</h3>
-              <p>${repo.description || (defaultDescMap[currentLang] || defaultDescMap.es)}</p>
+              <p>${repo.description || 'Sin descripción asignada en el repositorio.'}</p>
             </div>
             <div>
               <div class="tags">
@@ -1865,7 +1930,7 @@
               </div>
               <div class="project-links">
                 ${demoBtn}
-                <a href="${repo.html_url}" target="_blank" rel="noopener">${codeLabelMap[currentLang] || codeLabelMap.es}</a>
+                <a href="${repo.html_url}" target="_blank" rel="noopener">Código ↗</a>
               </div>
             </div>
           `;
@@ -1889,7 +1954,7 @@
     // --- 2. GESTIÓN TOUCH / TAP EN SKILLS ---
     const skillCards = document.querySelectorAll('.skill-card');
     skillCards.forEach(card => {
-      card.addEventListener('click', (e) => {
+      card.addEventListener('click', () => {
         skillCards.forEach(c => {
           if (c !== card) c.classList.remove('active-tap');
         });
@@ -1974,14 +2039,8 @@
 
     // --- 4. MÁQUINA DE ESCRIBIR ---
     const roles = {
-      es: ["Desarrollo Web", "Aplicaciones Eficientes", "Experiencias UI/UX"],
-      en: ["Web Development", "Efficient Applications", "UI/UX Experiences"],
-      pt: ["Desenvolvimento Web", "Aplicações Eficientes", "Experiências UI/UX"],
-      de: ["Webentwicklung", "Effiziente Anwendungen", "UI/UX-Erlebnisse"],
-      it: ["Sviluppo Web", "Applicazioni Efficienti", "Esperienze UI/UX"],
-      ja: ["ウェブ開発", "効率的なアプリ", "UI/UX エクスペリエンス"],
-      zh: ["网页开发", "高效应用程序", "UI/UX 体验"],
-      ar: ["تطوير الويب", "تطبيقات فعالة", "تجارب UI/UX"]
+      es: ["Desarrollo Web", "Aplicaciones Eficientes", "Bases de Datos & Backend", "Experiencias UI/UX"],
+      en: ["Web Development", "Efficient Applications", "Databases & Backend", "UI/UX Experiences"]
     };
     let roleIndex = 0, charIndex = 0, isDeleting = false;
     const typewriterEl = document.getElementById('typewriter-text');
@@ -2095,17 +2154,18 @@
       }
     });
 
-    // --- 8. LÓGICA INTERACTIVA PANTALLA DE DONACIONES ---
+    // --- 8. LÓGICA INTERACTIVA DONACIONES (PESTAÑAS + BOTÓN COPIAR + FORMULARIO) ---
     const donateScreen = document.getElementById('donate-screen');
     const navDonateTrigger = document.getElementById('nav-donate-trigger');
     const heroDonateTrigger = document.getElementById('hero-donate-trigger');
     const closeDonateBtn = document.getElementById('close-donate-btn');
     const presetBtns = document.querySelectorAll('.preset-btn');
     const donateAmountInput = document.getElementById('donate-amount');
-    const donateMethodSelect = document.getElementById('donate-method');
-    const paymentInstructions = document.getElementById('payment-instructions');
     const donateForm = document.getElementById('donateForm');
     const donateStatus = document.getElementById('donateStatus');
+    const payTabBtns = document.querySelectorAll('.pay-tab-btn');
+    const paymentPanels = document.querySelectorAll('.payment-panel');
+    const selectedMethodValue = document.getElementById('selected-method-value');
 
     function openDonateScreen(e) {
       if(e) e.preventDefault();
@@ -2120,7 +2180,7 @@
     heroDonateTrigger.addEventListener('click', openDonateScreen);
     closeDonateBtn.addEventListener('click', closeDonateScreen);
 
-    // Botones preestablecidos de monto
+    // Botones de monto
     presetBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         presetBtns.forEach(b => b.classList.remove('active'));
@@ -2129,30 +2189,55 @@
       });
     });
 
-    // Cambios en los detalles de pago
-    const methodDetails = {
-      'PayPal': 'Te redirigirá o se enviará la solicitud para PayPal (paypal.me/tu-usuario).',
-      'Pago Móvil / Transferencia': 'Datos de Pago Móvil: Banco Banesco | CI: V-12345678 | Tel: 0424-2139158',
-      'Criptomonedas / Binance': 'Binance Pay ID: 123456789 | BUSD/USDT (TRC20): TYourWalletAddressHere...'
-    };
+    // Cambio de Pestañas Interactivas de Pago
+    payTabBtns.forEach(tab => {
+      tab.addEventListener('click', () => {
+        payTabBtns.forEach(t => t.classList.remove('active'));
+        paymentPanels.forEach(p => p.classList.remove('active'));
 
-    donateMethodSelect.addEventListener('change', (e) => {
-      paymentInstructions.textContent = methodDetails[e.target.value] || '';
+        tab.classList.add('active');
+        const targetId = tab.dataset.target;
+        const targetPanel = document.getElementById(targetId);
+        if (targetPanel) {
+          targetPanel.classList.add('active');
+        }
+
+        // Asignar el nombre del método seleccionado
+        if (targetId === 'panel-pagomovil') selectedMethodValue.value = 'Pago Móvil (Bolívares)';
+        if (targetId === 'panel-paypal') selectedMethodValue.value = 'PayPal (USD)';
+        if (targetId === 'panel-crypto') selectedMethodValue.value = 'Criptomonedas / Binance Pay';
+      });
     });
 
-    // Envío del registro de pago al Backend
+    // Función global para copiar datos al portapapeles con animación
+    window.copyToClipboard = function(text, btnElement) {
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btnElement.innerHTML;
+        btnElement.innerHTML = '✔ ¡Copiado!';
+        btnElement.classList.add('copied');
+
+        setTimeout(() => {
+          btnElement.innerHTML = originalText;
+          btnElement.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        alert('Error al copiar automáticamente: ' + text);
+      });
+    };
+
+    // Envío del formulario de Donación al backend
     donateForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const donateSubmitBtn = document.getElementById('donateSubmitBtn');
       donateSubmitBtn.disabled = true;
       donateStatus.style.color = '#f59e0b';
-      donateStatus.textContent = '⚡ Registrando donación en la nube y generando correo...';
+      donateStatus.textContent = '⚡ Registrando donación en la nube...';
 
       const donationData = {
         name: document.getElementById('donate-name').value.trim(),
         email: document.getElementById('donate-email').value.trim(),
         amount: parseFloat(donateAmountInput.value),
-        method: donateMethodSelect.value
+        method: selectedMethodValue.value
       };
 
       try {
@@ -2165,8 +2250,8 @@
         const result = await response.json();
 
         if (response.ok) {
-          donateStatus.style.color = '#34d399';
-          donateStatus.textContent = '¡Gracias por tu apoyo! Se ha registrado el pago y enviado un correo de agradecimiento.';
+          donateStatus.style.color = '#10b981';
+          donateStatus.textContent = '¡Gracias por tu apoyo! Se ha registrado el pago con éxito.';
           donateForm.reset();
           setTimeout(() => {
             closeDonateScreen();
@@ -2192,9 +2277,6 @@
     const cliInput = document.getElementById('cli-input');
     const cliOutput = document.getElementById('cli-output');
 
-    let commandHistory = [];
-    let historyIndex = -1;
-
     function toggleCLI() {
       cliModal.classList.toggle('hidden');
       if (!cliModal.classList.contains('hidden')) {
@@ -2215,96 +2297,34 @@
     }
 
     const cliCommands = {
-      help: () => {
-        return `Comandos disponibles:
+      help: () => `Comandos disponibles:
   <span class="cmd-highlight">help</span>       - Muestra este menú de ayuda
   <span class="cmd-highlight">about</span>      - Resumen sobre Blujeaan
   <span class="cmd-highlight">donate</span>     - Abre la pantalla interactiva de donación
   <span class="cmd-highlight">skills</span>     - Lista de habilidades técnicas
   <span class="cmd-highlight">projects</span>   - Desplaza a la sección de proyectos
-  <span class="cmd-highlight">contact</span>    - Información de contacto y formulario
-  <span class="cmd-highlight">sudo hire</span>  - [PRIVILEGIO] Contratación inmediata
-  <span class="cmd-highlight">clear</span>      - Limpia la consola
-  <span class="cmd-highlight">exit</span>       - Cierra la consola interactiva`;
-      },
-      donate: () => {
-        openDonateScreen();
-        return `Abriendo pantalla interactiva de donación... ☕`;
-      },
-      about: () => {
-        return `Blujeaan | Kikicode: Desarrollador Frontend enfocado en crear experiencias eficientes y aplicaciones adaptables.`;
-      },
-      skills: () => {
-        return `Habilidades Principales:
-• Frontend: HTML5, CSS3, JavaScript, React, Tailwind CSS, Responsive Design
-• Backend & Tools: Node.js, Express.js, REST APIs, Python, Git & GitHub, Render`;
-      },
-      projects: () => {
-        const projectsEl = document.getElementById('projects');
-        if (projectsEl) projectsEl.scrollIntoView({ behavior: 'smooth' });
-        return `Navegando a la sección <span class="cmd-highlight">Repositorios en Vivo</span>...`;
-      },
-      contact: () => {
-        const contactEl = document.getElementById('contact');
-        if (contactEl) contactEl.scrollIntoView({ behavior: 'smooth' });
-        return `Navegando a la sección <span class="cmd-highlight">Contacto</span>...`;
-      },
-      'sudo hire': () => {
-        const contactEl = document.getElementById('contact');
-        if (contactEl) contactEl.scrollIntoView({ behavior: 'smooth' });
-        return `<span class="success-response">[ROOT PRIVILEGES GRANTED]</span>
-⚡ Proceso de contratación iniciado exitosamente.`;
-      },
-      clear: () => {
-        cliOutput.innerHTML = '';
-        return null;
-      },
-      exit: () => {
-        toggleCLI();
-        return `Cerrando terminal...`;
-      }
+  <span class="cmd-highlight">clear</span>      - Limpia la consola`,
+      about: () => `Desarrollador Frontend enfocado en crear arquitecturas rápidas, eficientes y responsivas.`,
+      donate: () => { openDonateScreen(); return `Pantalla de donaciones abierta correctamente.`; },
+      skills: () => `HTML5, CSS3, JavaScript, Node.js, Express.js, MongoDB, Git, React, Tailwind CSS, Python.`,
+      clear: () => { cliOutput.innerHTML = ''; return ''; }
     };
 
     cliInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
-        const rawInput = cliInput.value.trim();
-        const cmd = rawInput.toLowerCase();
+        const cmd = cliInput.value.trim().toLowerCase();
+        if (!cmd) return;
 
-        if (rawInput !== '') {
-          commandHistory.push(rawInput);
-          historyIndex = commandHistory.length;
-        }
-
-        printCLILine(`<span class="cli-prompt">guest@blujeaan:~$</span> ${rawInput}`, 'user-entry');
-
-        if (cmd === '') {
-          cliInput.value = '';
-          return;
-        }
-
+        printCLILine(`guest@blujeaan:~$ ${cmd}`, 'user-entry');
+        
         if (cliCommands[cmd]) {
-          const output = cliCommands[cmd]();
-          if (output) printCLILine(output, cmd === 'sudo hire' ? 'success-response' : 'system-response');
+          const res = cliCommands[cmd]();
+          if (res) printCLILine(res);
         } else {
-          printCLILine(`Comando no reconocido: '<span class="cmd-highlight">${rawInput}</span>'. Escribe <span class="cmd-highlight">'help'</span> para ver la lista de comandos.`, 'warning-response');
+          printCLILine(`Comando no reconocido: '${cmd}'. Escribe 'help' para ver la lista.`, 'warning-response');
         }
 
         cliInput.value = '';
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (historyIndex > 0) {
-          historyIndex--;
-          cliInput.value = commandHistory[historyIndex];
-        }
-      } else if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        if (historyIndex < commandHistory.length - 1) {
-          historyIndex++;
-          cliInput.value = commandHistory[historyIndex];
-        } else {
-          historyIndex = commandHistory.length;
-          cliInput.value = '';
-        }
       }
     });
   </script>
