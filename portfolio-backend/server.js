@@ -1,6 +1,4 @@
 const dns = require('dns');
-dns.setDefaultResultOrder('ipv4first'); // Fuerza a Node a resolver DNS priorizando IPv4
-
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
@@ -17,17 +15,17 @@ const supabase = createClient(
   process.env.SUPABASE_KEY
 );
 
-// 2. Transportador de correo (Puerto 465 con SSL directo para evitar timeouts en Render)
+// 2. Transportador de correo (forzando DNS a resolver únicamente IPv4)
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 465,
-  secure: true, // SSL directo
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   },
-  tls: {
-    rejectUnauthorized: false
+  lookup: (hostname, options, callback) => {
+    dns.lookup(hostname, { family: 4 }, callback);
   },
   connectionTimeout: 15000,
   greetingTimeout: 15000,
