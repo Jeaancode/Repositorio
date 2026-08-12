@@ -1,3 +1,6 @@
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first'); // Corrección para que Nodemailer use IPv4 en Render
+
 const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
@@ -14,7 +17,7 @@ const supabase = createClient(
   process.env.SUPABASE_KEY
 );
 
-// 2. Transportador de correo (con 'family: 4' para IPv4)
+// 2. Transportador de correo
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
@@ -23,7 +26,7 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   },
-  family: 4, // Forzar IPv4 en Render
+  family: 4, // Forzar IPv4
   connectionTimeout: 10000,
   greetingTimeout: 10000,
   socketTimeout: 10000
